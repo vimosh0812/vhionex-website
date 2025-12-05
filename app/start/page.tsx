@@ -3,7 +3,7 @@ import StartProject from "@/components/landing-page/start-project"
 import Footer from "@/components/landing-page/footer"
 
 export const metadata = {
-  title: "Start Your Project | Automatic",
+  title: "Start Your Project | vhionex",
   description: "Get started with your next project by answering a few questions and scheduling a call with our team.",
 }
 

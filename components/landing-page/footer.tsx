@@ -24,7 +24,7 @@ export default function Footer() {
           {mounted ? (
             <Image
               src={logoSrc || "/placeholder.svg"}
-              alt="Automatic Logo"
+              alt="vhionex Logo"
               width={200}
               height={50}
               className="h-12 w-auto"
@@ -38,7 +38,7 @@ export default function Footer() {
         </p>
 
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          © {new Date().getFullYear()} Automatic. All rights reserved.
+          © {new Date().getFullYear()} vhionex. All rights reserved.
         </p>
       </div>
     </footer>

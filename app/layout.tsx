@@ -15,7 +15,7 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-  title: "Automatic - Your AI-first Development Partner",
+  title: "vhionex - Your AI-first Development Partner",
   description:
     "We build high-quality, scalable platforms—client portals, marketplaces, AI automations, and SaaS—using the best tools for the job, no shortcuts.",
   icons: {
@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={outfit.className}>
         <Suspense fallback={null}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
           </ThemeProvider>
           <Analytics />
