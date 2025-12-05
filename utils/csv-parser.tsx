@@ -19,17 +19,27 @@ export async function fetchPortfolioData(): Promise<PortfolioItem[]> {
   }
 
   try {
-    // Use local sample file as primary source for template
-    const response = await fetch("/data/portfolio-sample.csv", {
-      // Add cache: 'no-store' for server components to always fetch fresh data
-      cache: typeof window === "undefined" ? "no-store" : "default",
-    })
+    let csvText: string
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch portfolio CSV: ${response.status}`)
+    if (typeof window === "undefined") {
+      // Server-side: Read file directly from filesystem
+      const fs = await import("fs/promises")
+      const path = await import("path")
+      const filePath = path.join(process.cwd(), "public", "data", "portfolio-sample.csv")
+      csvText = await fs.readFile(filePath, "utf-8")
+    } else {
+      // Client-side: Use fetch
+      const response = await fetch("/data/portfolio-sample.csv", {
+        cache: "force-cache",
+      })
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch portfolio CSV: ${response.status}`)
+      }
+
+      csvText = await response.text()
     }
 
-    const csvText = await response.text()
     const parsedData = parseCSV(csvText)
 
     // Cache the data on the client side
@@ -137,11 +147,11 @@ function parseCSV(csvText: string): PortfolioItem[] {
     headers.forEach((header, index) => {
       const key = columnMap[header]
       if (key && index < values.length) {
-        item[key] = values[index]
+        // Workaround for type assignment; TS complains because some PortfolioItem properties are not string
+        // We'll handle 'categories' later, so treat other keys as string
+        (item as any)[key] = values[index]
       }
     })
-
-    // Add categories based on content or title for filtering
     item.categories = inferCategories(item as PortfolioItem)
 
     items.push(item as PortfolioItem)
