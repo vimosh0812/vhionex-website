@@ -17,8 +17,13 @@ export default function ThemeToggle({ className = "" }: ThemeToggleProps) {
     setMounted(true)
   }, [])
 
-  // Use resolvedTheme for immediate updates, fallback to light for SSR
-  const isDarkMode = mounted ? resolvedTheme === "dark" : false
+  // Return non-interactive placeholder during SSR/mounting to prevent unintended clicks
+  if (!mounted) {
+    return <div className={`p-2 rounded-full ${className}`} aria-hidden="true" />
+  }
+
+  // Use resolvedTheme for immediate updates once mounted
+  const isDarkMode = resolvedTheme === "dark"
 
   const handleToggle = () => {
     const newTheme = isDarkMode ? "light" : "dark"
@@ -33,12 +38,8 @@ export default function ThemeToggle({ className = "" }: ThemeToggleProps) {
       } ${className}`}
       aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
     >
-      {mounted ? (
-        isDarkMode ? (
-          <Sun className="h-5 w-5 text-white" />
-        ) : (
-          <Moon className="h-5 w-5 text-gray-800" />
-        )
+      {isDarkMode ? (
+        <Sun className="h-5 w-5 text-white" />
       ) : (
         <Moon className="h-5 w-5 text-gray-800" />
       )}

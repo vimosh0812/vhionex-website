@@ -1,6 +1,6 @@
-# Automatic - AI-First Development Agency Landing Page
+# vhionex - AI-First Development Agency Landing Page
 
-A modern, professional landing page template for development agencies and tech consultancies built with Next.js 14, TypeScript, and Tailwind CSS.
+A modern, professional landing page for vhionex, an AI-first development agency built with Next.js 14, TypeScript, and Tailwind CSS.
 
 ## Features
 
@@ -19,7 +19,7 @@ A modern, professional landing page template for development agencies and tech c
 1. **Clone the repository**
    \`\`\`bash
    git clone <repository-url>
-   cd automatic-landing
+   cd vhionex-landing
    \`\`\`
 
 2. **Install dependencies**
@@ -110,7 +110,7 @@ Each project includes realistic content, proper categorization, and placeholder 
 
 ### Images
 - Replace logos in the `public/` directory
-- Update favicon by replacing `public/automatic-favicon-no-bg.png`
+- Update favicon by replacing `public/automatic-favicon-no-bg.png` (or rename to `vhionex-favicon.png`)
 - Add your own project images to the `public/` directory
 
 ## Deployment
