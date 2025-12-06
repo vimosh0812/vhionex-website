@@ -86,6 +86,18 @@ export default function Header() {
                 <ul className="flex space-x-6">
                   <li>
                     <Link
+                      href="/"
+                      className={`transition-colors ${
+                        pathname === "/"
+                          ? "text-[#7A7FEE] dark:text-[#7A7FEE]"
+                          : "text-black dark:text-white hover:text-[#7A7FEE] dark:hover:text-[#7A7FEE]"
+                      }`}
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       href="/portfolio"
                       className={`transition-colors ${
                         pathname === "/portfolio"

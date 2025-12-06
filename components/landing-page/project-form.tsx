@@ -3,12 +3,14 @@
 import type React from "react"
 
 import { useState } from "react"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Home, Check } from "lucide-react"
+import { useRouter } from "next/navigation"
 import emailjs from "@emailjs/browser"
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input"
 import "react-phone-number-input/style.css"
 
 export default function ProjectForm() {
+  const router = useRouter()
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -219,8 +221,9 @@ export default function ProjectForm() {
             </p>
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Form - Hidden when success is shown */}
+          {submitStatus !== "success" && (
+            <form onSubmit={handleSubmit} className="space-y-6">
             {/* First Name */}
             <div>
               <label htmlFor="firstName" className="block text-gray-900 text-sm font-medium mb-3">
@@ -317,15 +320,6 @@ export default function ProjectForm() {
               )}
             </div>
 
-            {/* Submit Status Messages */}
-            {submitStatus === "success" && (
-              <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
-                <p className="text-green-800 text-sm font-medium">
-                  ✓ Thank you! We've received your message and will get back to you soon.
-                </p>
-              </div>
-            )}
-
             {submitStatus === "error" && (
               <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
                 <p className="text-red-800 text-sm font-medium">
@@ -378,6 +372,51 @@ export default function ProjectForm() {
               </button>
             </div>
           </form>
+        )}
+
+        {/* Success Message - shown instead of form */}
+        {submitStatus === "success" && (
+          <div className="p-8 bg-gradient-to-br from-[#7A7FEE]/10 to-[#9D7FEE]/10 border border-[#7A7FEE]/20 rounded-2xl">
+            {/* AI Loading Animation with Checkmark */}
+            <div className="flex flex-col items-center justify-center mb-6">
+              <div className="relative w-20 h-20 mb-4">
+                {/* Outer rotating ring */}
+                <div className="absolute inset-0 border-4 border-[#7A7FEE]/20 rounded-full"></div>
+                <div className="absolute inset-0 border-4 border-transparent border-t-[#7A7FEE] rounded-full animate-spin"></div>
+                
+                {/* Middle pulsing circle */}
+                <div className="absolute inset-2 border-2 border-[#7A7FEE]/40 rounded-full animate-pulse"></div>
+                
+                {/* Inner dot with checkmark */}
+                <div className="absolute inset-4 bg-gradient-to-br from-[#7A7FEE] to-[#9D7FEE] rounded-full animate-pulse flex items-center justify-center">
+                  <Check className="w-6 h-6 text-white stroke-[3]" />
+                </div>
+                
+                {/* Sparkle effects */}
+                <div className="absolute top-0 left-1/2 w-2 h-2 bg-[#7A7FEE] rounded-full animate-ping"></div>
+                <div className="absolute bottom-0 right-0 w-1.5 h-1.5 bg-[#9D7FEE] rounded-full animate-ping" style={{ animationDelay: "0.5s" }}></div>
+                <div className="absolute top-1/2 right-0 w-1 h-1 bg-[#7A7FEE] rounded-full animate-ping" style={{ animationDelay: "1s" }}></div>
+              </div>
+              
+              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Message Sent Successfully!</h3>
+              <p className="text-gray-700 text-center max-w-md mb-6">
+                Our experts will get back to you within <span className="font-semibold text-[#7A7FEE]">12-24 hours</span>.
+              </p>
+            </div>
+            
+            {/* Back to Home Button */}
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={() => router.push("/")}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#7A7FEE] text-white rounded-lg text-sm font-medium hover:bg-[#6a6fdd] transition-all shadow-md hover:shadow-lg"
+              >
+                <Home className="w-4 h-4" />
+                Back to Home
+              </button>
+            </div>
+          </div>
+        )}
         </div>
       </div>
     </div>
