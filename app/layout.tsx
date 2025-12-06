@@ -2,7 +2,6 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Outfit } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Analytics } from "@vercel/analytics/react"
 import "@/components/landing-page/styles.css"
 import { Suspense } from "react"
 import "./globals.css"
@@ -19,8 +18,9 @@ export const metadata: Metadata = {
   description:
     "vhionex (Pvt Ltd) builds high-quality, scalable platforms—client portals, marketplaces, AI automations, and SaaS—using the best tools for the job, no shortcuts.",
   icons: {
-    icon: [{ url: "/vhionex-favicon.png", type: "image/png" }],
-    apple: [{ url: "/vhionex-favicon.png" }],
+    icon: [{ url: "/vhionex-new.png?v=2", type: "image/png" }],
+    apple: [{ url: "/vhionex-new.png?v=2" }],
+    shortcut: [{ url: "/vhionex-new.png?v=2", type: "image/png" }],
   },
     generator: 'v0.app'
 }
@@ -37,7 +37,6 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
           </ThemeProvider>
-          <Analytics />
         </Suspense>
       </body>
     </html>
