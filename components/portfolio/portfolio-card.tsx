@@ -19,10 +19,10 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
             height={400}
             className="w-full h-48 object-cover"
           />
-          {item.categories && item.categories.length > 1 && (
+          {item.tags && item.tags.length > 0 && (
             <div className="absolute top-4 left-4">
-              <span className="px-2 py-1 bg-black/50 backdrop-blur-sm rounded-full text-xs text-white">
-                {item.categories[1].charAt(0).toUpperCase() + item.categories[1].slice(1)}
+              <span className="px-2 py-1 bg-black/50 dark:bg-black/70 backdrop-blur-sm rounded-full text-xs text-white">
+                {item.tags[0]}
               </span>
             </div>
           )}
@@ -32,7 +32,7 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
           <h3 className="font-medium text-gray-900 dark:text-white text-lg mb-2">{item.title}</h3>
           <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">{item.shortDescription}</p>
           <div className="inline-flex items-center text-[#7A7FEE] hover:underline text-sm font-medium mt-auto">
-            View Project <ArrowUpRight className="w-4 h-4 ml-1" />
+            View Case Study <ArrowUpRight className="w-4 h-4 ml-1" />
           </div>
         </div>
       </Link>

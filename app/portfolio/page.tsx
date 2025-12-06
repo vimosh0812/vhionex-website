@@ -3,7 +3,7 @@ import { fetchPortfolioData } from "@/utils/csv-parser"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Portfolio | vhionex",
+  title: "Portfolio | vhionex (Pvt Ltd)",
   description:
     "Explore our latest projects and case studies. From AI-driven automation to custom marketplaces, our work helps businesses scale smarter.",
 }

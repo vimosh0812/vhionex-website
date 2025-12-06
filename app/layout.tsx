@@ -15,12 +15,12 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-  title: "vhionex - Your AI-first Development Partner",
+  title: "vhionex (Pvt Ltd) - Your AI-first Development Partner",
   description:
-    "We build high-quality, scalable platforms—client portals, marketplaces, AI automations, and SaaS—using the best tools for the job, no shortcuts.",
+    "vhionex (Pvt Ltd) builds high-quality, scalable platforms—client portals, marketplaces, AI automations, and SaaS—using the best tools for the job, no shortcuts.",
   icons: {
-    icon: [{ url: "/automatic-favicon-no-bg.png", type: "image/png" }],
-    apple: [{ url: "/automatic-favicon-no-bg.png" }],
+    icon: [{ url: "/vhionex-favicon.png", type: "image/png" }],
+    apple: [{ url: "/vhionex-favicon.png" }],
   },
     generator: 'v0.app'
 }

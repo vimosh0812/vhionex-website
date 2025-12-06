@@ -240,7 +240,7 @@
   }
 
   .phone-input-wrapper .PhoneInputCountrySelect {
-    @apply px-3 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all cursor-pointer;
+    @apply px-3 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all cursor-pointer;
     min-width: 100px;
     height: 48px;
     appearance: none !important;
@@ -251,7 +251,10 @@
     background-position: right 0.5rem center !important;
     background-size: 1.5em 1.5em !important;
     padding-right: 2.5rem !important;
-    border: 1px solid #d1d5db !important;
+  }
+
+  .dark .phone-input-wrapper .PhoneInputCountrySelect {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ffffff'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E") !important;
   }
 
   .phone-input-wrapper .PhoneInputCountrySelect:focus {
@@ -260,7 +263,7 @@
   }
 
   .phone-input-wrapper .PhoneInputCountrySelect:hover {
-    @apply border-gray-400;
+    @apply border-gray-400 dark:border-gray-500;
   }
 
   .phone-input-wrapper .PhoneInputCountryIcon {
@@ -281,7 +284,7 @@
   }
 
   .phone-input-wrapper .PhoneInputInput {
-    @apply flex-1 px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all;
+    @apply flex-1 px-4 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all;
     width: 100%;
     height: 48px;
   }

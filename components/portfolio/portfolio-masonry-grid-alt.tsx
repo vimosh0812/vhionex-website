@@ -87,10 +87,10 @@ export default function PortfolioMasonryGridAlt({ items }: PortfolioMasonryGridP
                       handleImageLoad(item.slug, img.height)
                     }}
                   />
-                  {item.categories && item.categories.length > 1 && (
+                  {item.tags && item.tags.length > 0 && (
                     <div className="absolute top-4 left-4">
-                      <span className="px-2 py-1 bg-black/50 backdrop-blur-sm rounded-full text-xs text-white">
-                        {item.categories[1].charAt(0).toUpperCase() + item.categories[1].slice(1)}
+                      <span className="px-2 py-1 bg-black/50 dark:bg-black/70 backdrop-blur-sm rounded-full text-xs text-white">
+                        {item.tags[0]}
                       </span>
                     </div>
                   )}
@@ -105,7 +105,7 @@ export default function PortfolioMasonryGridAlt({ items }: PortfolioMasonryGridP
                     href={`/portfolio/${item.slug}`}
                     className="inline-flex items-center text-[#7A7FEE] hover:underline text-sm font-medium"
                   >
-                    View Project <ArrowUpRight className="w-4 h-4 ml-1" />
+                    View Case Study <ArrowUpRight className="w-4 h-4 ml-1" />
                   </Link>
                 </div>
               </div>

@@ -9,10 +9,8 @@ export default function PortfolioFilters({ activeFilter, setActiveFilter }: Port
   const filters = [
     { id: "all", label: "All Projects" },
     { id: "web", label: "Web Applications" },
-    { id: "web3", label: "Web3 & Blockchain" },
     { id: "ai", label: "AI Solutions" },
     { id: "design", label: "UX/UI Design" },
-    { id: "bubble", label: "Bubble Projects" },
     { id: "mobile", label: "Mobile Apps" },
   ]
 

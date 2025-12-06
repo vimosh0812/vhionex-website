@@ -15,13 +15,13 @@ export async function generateMetadata({ params }: PortfolioDetailProps, parent:
 
   if (!project) {
     return {
-      title: "Project Not Found | vhionex",
+      title: "Project Not Found | vhionex (Pvt Ltd)",
       description: "The requested project could not be found.",
     }
   }
 
   return {
-    title: `${project.title} | vhionex Portfolio`,
+    title: `${project.title} | vhionex (Pvt Ltd) Portfolio`,
     description: project.shortDescription,
     openGraph: {
       images: [project.mainImage],

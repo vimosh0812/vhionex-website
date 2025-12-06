@@ -60,9 +60,9 @@ export default function PortfolioBentoGrid({ items }: PortfolioBentoGridProps) {
             <div className="p-4 md:p-6 flex-grow">
               <div className="flex flex-col h-full">
                 <div className="flex items-center gap-2 mb-2">
-                  {item.categories && item.categories.length > 1 && (
+                  {item.tags && item.tags.length > 0 && (
                     <span className="px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-full text-xs text-gray-800 dark:text-gray-200 whitespace-nowrap">
-                      {item.categories[1].charAt(0).toUpperCase() + item.categories[1].slice(1)}
+                      {item.tags[0]}
                     </span>
                   )}
                 </div>
@@ -79,7 +79,7 @@ export default function PortfolioBentoGrid({ items }: PortfolioBentoGridProps) {
                     href={`/portfolio/${item.slug}`}
                     className="inline-flex items-center text-[#7A7FEE] hover:underline text-sm font-medium"
                   >
-                    View Project
+                    View Case Study
                     <ArrowUpRight className="w-4 h-4 ml-1" />
                   </Link>
                 </div>

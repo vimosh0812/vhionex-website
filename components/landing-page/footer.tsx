@@ -34,11 +34,11 @@ export default function Footer() {
           )}
         </Link>
         <p className="text-sm text-gray-600 dark:text-gray-400 max-w-md mx-auto mb-8">
-          Your AI-first development partner building high-quality, scalable platforms.
+          vhionex (Pvt Ltd) - Your AI-first development partner building high-quality, scalable platforms.
         </p>
 
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          © {new Date().getFullYear()} vhionex. All rights reserved.
+          © {new Date().getFullYear()} vhionex (Pvt Ltd). All rights reserved.
         </p>
       </div>
     </footer>

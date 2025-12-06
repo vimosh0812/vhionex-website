@@ -7,7 +7,8 @@ export interface PortfolioItem {
   projectUrl: string
   content: string
   sortOrder: string
-  categories?: string[] // We'll add this for filtering
+  categories?: string[]
+  tags?: string[] 
 }
 
 // Add a check for client-side environment at the top of the fetchPortfolioData function
@@ -50,56 +51,43 @@ export async function fetchPortfolioData(): Promise<PortfolioItem[]> {
     return parsedData
   } catch (error) {
     console.error("Error fetching portfolio data:", error)
-    // Return fallback sample data if CSV fails to load
-    return getFallbackPortfolioData()
+    // Throw error instead of returning fallback data
+    throw error
   }
-}
-
-// Fallback data in case CSV file fails to load
-function getFallbackPortfolioData(): PortfolioItem[] {
-  return [
-    {
-      slug: "sample-saas-platform",
-      title: "TaskFlow Pro",
-      logo: "/taskflow-logo.jpg",
-      mainImage: "/portfolio-images/saas-dashboard-1.jpg",
-      shortDescription: "AI-powered task management platform for teams",
-      projectUrl: "https://example.com",
-      content: `<h3>Project Overview</h3><p>TaskFlow Pro is a comprehensive task management platform that leverages AI to help teams prioritize work and optimize productivity. Built with modern web technologies, it features real-time collaboration, intelligent task suggestions, and advanced analytics.</p><h3>Key Features</h3><ul><li>AI-powered task prioritization</li><li>Real-time team collaboration</li><li>Advanced project analytics</li><li>Custom workflow automation</li><li>Mobile-responsive design</li></ul><h3>Technologies Used</h3><p>This project was built using React, Node.js, PostgreSQL, and OpenAI's API for intelligent task suggestions. The platform handles over 10,000 active users and processes millions of tasks monthly.</p>`,
-      sortOrder: "2024-01-15",
-      categories: ["all", "web", "ai"],
-    },
-    {
-      slug: "ecommerce-marketplace",
-      title: "ShopConnect",
-      logo: "/shopconnect-logo.jpg",
-      mainImage: "/portfolio-images/ecommerce-interface-1.jpg",
-      shortDescription: "Multi-vendor marketplace with AI recommendations",
-      projectUrl: "https://example.com",
-      content: `<h3>Project Overview</h3><p>ShopConnect is a modern multi-vendor marketplace that connects buyers with sellers through an intuitive platform. The system features AI-powered product recommendations, advanced search capabilities, and seamless payment processing.</p><h3>Key Features</h3><ul><li>Multi-vendor management system</li><li>AI-powered product recommendations</li><li>Advanced search and filtering</li><li>Secure payment processing</li><li>Vendor analytics dashboard</li><li>Mobile app integration</li></ul><h3>Technical Implementation</h3><p>Built with Next.js, Stripe for payments, and a microservices architecture. The platform supports thousands of vendors and processes over $1M in transactions monthly.</p>`,
-      sortOrder: "2024-01-10",
-      categories: ["all", "web", "ai"],
-    },
-    {
-      slug: "ai-content-generator",
-      title: "ContentAI Studio",
-      logo: "/contentai-logo.jpg",
-      mainImage: "/portfolio-images/ai-platform-1.jpg",
-      shortDescription: "AI-powered content creation platform for marketers",
-      projectUrl: "https://example.com",
-      content: `<h3>Project Overview</h3><p>ContentAI Studio revolutionizes content creation by providing marketers with AI-powered tools to generate high-quality blog posts, social media content, and marketing copy in minutes rather than hours.</p><h3>Key Features</h3><ul><li>Multi-format content generation</li><li>Brand voice customization</li><li>SEO optimization tools</li><li>Content calendar integration</li><li>Team collaboration features</li><li>Performance analytics</li></ul><h3>Impact & Results</h3><p>The platform has helped over 500 marketing teams reduce content creation time by 70% while maintaining quality. Built with React, Python, and integrated with multiple AI models for optimal results.</p>`,
-      sortOrder: "2024-01-05",
-      categories: ["all", "web", "ai"],
-    },
-  ]
 }
 
 function parseCSV(csvText: string): PortfolioItem[] {
   // Split the CSV into lines
-  const lines = csvText.split("\n")
+  const lines = csvText.split("\n").filter((line) => line.trim()) // Remove empty lines
 
-  // Extract headers (first line)
-  const headers = lines[0].split(",").map((header) => header.trim().replace(/^"/, "").replace(/"$/, ""))
+  if (lines.length < 2) {
+    console.error("CSV file is empty or has no data rows")
+    return []
+  }
+
+  // Extract headers (first line) - handle quoted headers
+  const headerLine = lines[0]
+  const headers: string[] = []
+  let currentHeader = ""
+  let insideQuotes = false
+
+  for (let i = 0; i < headerLine.length; i++) {
+    const char = headerLine[i]
+    if (char === '"') {
+      insideQuotes = !insideQuotes
+    } else if (char === "," && !insideQuotes) {
+      headers.push(currentHeader.trim().replace(/^"/, "").replace(/"$/, ""))
+      currentHeader = ""
+    } else {
+      currentHeader += char
+    }
+  }
+  // Add the last header
+  if (currentHeader.trim()) {
+    headers.push(currentHeader.trim().replace(/^"/, "").replace(/"$/, ""))
+  }
+
+  console.log("Parsed CSV headers:", headers)
 
   // Map CSV columns to our interface properties
   const columnMap: Record<string, keyof PortfolioItem> = {
@@ -111,6 +99,7 @@ function parseCSV(csvText: string): PortfolioItem[] {
     "Project URL": "projectUrl",
     Content: "content",
     "Sort Order": "sortOrder",
+    Tags: "tags",
   }
 
   // Parse the data rows
@@ -147,26 +136,91 @@ function parseCSV(csvText: string): PortfolioItem[] {
     headers.forEach((header, index) => {
       const key = columnMap[header]
       if (key && index < values.length) {
-        // Workaround for type assignment; TS complains because some PortfolioItem properties are not string
-        // We'll handle 'categories' later, so treat other keys as string
-        (item as any)[key] = values[index]
+        // Handle tags separately (comma-separated values)
+        if (key === "tags") {
+          const tagsValue = values[index]
+          item.tags = tagsValue ? tagsValue.split(",").map((tag) => tag.trim()) : []
+        } else {
+          // Workaround for type assignment; TS complains because some PortfolioItem properties are not string
+          // We'll handle 'categories' later, so treat other keys as string
+          (item as any)[key] = values[index]
+        }
       }
     })
-    item.categories = inferCategories(item as PortfolioItem)
+    // Map tags to categories for filtering
+    item.categories = mapTagsToCategories(item.tags || [], item as PortfolioItem)
 
     items.push(item as PortfolioItem)
   }
 
+  console.log(`Parsed ${items.length} portfolio items from CSV`)
+
   // Sort by sortOrder
-  return items.sort((a, b) => {
+  const sorted = items.sort((a, b) => {
     return new Date(b.sortOrder).getTime() - new Date(a.sortOrder).getTime()
   })
+
+  console.log("Sorted portfolio items (most recent first):", sorted.map((item) => ({ title: item.title, sortOrder: item.sortOrder })))
+
+  return sorted
 }
 
-function inferCategories(item: PortfolioItem): string[] {
+// Map tags from CSV to filter categories
+function mapTagsToCategories(tags: string[], item: PortfolioItem): string[] {
   const categories: string[] = ["all"]
 
-  // Add categories based on content keywords
+  // Map tags to category IDs based on filter categories
+  tags.forEach((tag) => {
+    const tagLower = tag.toLowerCase().trim()
+    
+    // AI Solutions
+    if (tagLower === "ai" || tagLower.includes("ai solution")) {
+      if (!categories.includes("ai")) categories.push("ai")
+    }
+    
+    // Mobile Apps
+    if (tagLower === "mobile app" || tagLower === "mobile" || tagLower.includes("mobile app")) {
+      if (!categories.includes("mobile")) categories.push("mobile")
+    }
+    
+    // Web Applications
+    if (tagLower === "web app" || tagLower === "web application" || tagLower === "web" || tagLower.includes("web app")) {
+      if (!categories.includes("web")) categories.push("web")
+    }
+    
+    // Web3 & Blockchain
+    if (tagLower === "web3" || tagLower === "blockchain" || tagLower === "crypto" || tagLower.includes("web3") || tagLower.includes("blockchain") || tagLower.includes("crypto")) {
+      if (!categories.includes("web3")) categories.push("web3")
+    }
+    
+    // Bubble Projects
+    if (tagLower === "bubble" || tagLower.includes("bubble") || tagLower.includes("no-code") || tagLower.includes("nocode")) {
+      if (!categories.includes("bubble")) categories.push("bubble")
+    }
+    
+    // UX/UI Design
+    if (tagLower === "design" || tagLower === "ui" || tagLower === "ux" || tagLower.includes("design") || tagLower.includes("ui") || tagLower.includes("ux")) {
+      if (!categories.includes("design")) categories.push("design")
+    }
+  })
+
+  // Fallback: if no tags match, infer from content (for backward compatibility)
+  if (categories.length === 1) {
+    const inferred = inferCategoriesFromContent(item)
+    categories.push(...inferred.filter((cat) => cat !== "all"))
+  }
+
+  // Ensure at least one category besides "all"
+  if (categories.length === 1) {
+    categories.push("web")
+  }
+
+  return categories
+}
+
+// Fallback function to infer categories from content if tags are not available
+function inferCategoriesFromContent(item: PortfolioItem): string[] {
+  const categories: string[] = ["all"]
   const contentLower = (item.content || "").toLowerCase()
   const titleLower = (item.title || "").toLowerCase()
   const descriptionLower = (item.shortDescription || "").toLowerCase()

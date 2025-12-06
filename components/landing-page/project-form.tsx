@@ -213,10 +213,10 @@ export default function ProjectForm() {
   return (
     <div className="container mx-auto py-12 px-6 md:px-10">
       <div className="max-w-xl mx-auto w-full">
-        <div className="bg-gray-50 rounded-2xl p-6 md:p-8 shadow-lg border border-gray-200">
+        <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-6 md:p-8 shadow-lg border border-gray-200 dark:border-gray-700">
           {/* Header */}
           <div className="mb-8">
-            <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+            <p className="text-gray-700 dark:text-gray-300 text-base md:text-lg leading-relaxed">
               Answer some quick questions about your project and then schedule a call with your project manager.
             </p>
           </div>
@@ -226,7 +226,7 @@ export default function ProjectForm() {
             <form onSubmit={handleSubmit} className="space-y-6">
             {/* First Name */}
             <div>
-              <label htmlFor="firstName" className="block text-gray-900 text-sm font-medium mb-3">
+              <label htmlFor="firstName" className="block text-gray-900 dark:text-white text-sm font-medium mb-3">
                 What is your first name? <span className="text-red-500">*</span>
               </label>
               <input
@@ -237,8 +237,8 @@ export default function ProjectForm() {
                 onChange={handleInputChange}
                 onBlur={(e) => handleBlur("firstName", e.target.value)}
                 required
-                className={`w-full px-4 py-3 bg-white border rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all ${
-                  errors.firstName ? "border-red-500" : "border-gray-300"
+                className={`w-full px-4 py-3 bg-white dark:bg-gray-800 border rounded-lg text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all ${
+                  errors.firstName ? "border-red-500" : "border-gray-300 dark:border-gray-600"
                 }`}
                 placeholder=""
               />
@@ -249,7 +249,7 @@ export default function ProjectForm() {
 
             {/* Last Name */}
             <div>
-              <label htmlFor="lastName" className="block text-gray-900 text-sm font-medium mb-3">
+              <label htmlFor="lastName" className="block text-gray-900 dark:text-white text-sm font-medium mb-3">
                 Last name? <span className="text-red-500">*</span>
               </label>
               <input
@@ -260,8 +260,8 @@ export default function ProjectForm() {
                 onChange={handleInputChange}
                 onBlur={(e) => handleBlur("lastName", e.target.value)}
                 required
-                className={`w-full px-4 py-3 bg-white border rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all ${
-                  errors.lastName ? "border-red-500" : "border-gray-300"
+                className={`w-full px-4 py-3 bg-white dark:bg-gray-800 border rounded-lg text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all ${
+                  errors.lastName ? "border-red-500" : "border-gray-300 dark:border-gray-600"
                 }`}
                 placeholder=""
               />
@@ -272,7 +272,7 @@ export default function ProjectForm() {
 
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-gray-900 text-sm font-medium mb-3">
+              <label htmlFor="email" className="block text-gray-900 dark:text-white text-sm font-medium mb-3">
                 What is your email? <span className="text-red-500">*</span>
               </label>
               <input
@@ -283,8 +283,8 @@ export default function ProjectForm() {
                 onChange={handleInputChange}
                 onBlur={(e) => handleBlur("email", e.target.value)}
                 required
-                className={`w-full px-4 py-3 bg-white border rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all ${
-                  errors.email ? "border-red-500" : "border-gray-300"
+                className={`w-full px-4 py-3 bg-white dark:bg-gray-800 border rounded-lg text-gray-900 dark:text-white text-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all ${
+                  errors.email ? "border-red-500" : "border-gray-300 dark:border-gray-600"
                 }`}
                 placeholder=""
               />
@@ -295,7 +295,7 @@ export default function ProjectForm() {
 
             {/* Phone Number */}
             <div>
-              <label htmlFor="phone" className="block text-gray-900 text-sm font-medium mb-3">
+              <label htmlFor="phone" className="block text-gray-900 dark:text-white text-sm font-medium mb-3">
                 Your phone number
               </label>
               <div className={`phone-input-wrapper ${errors.phone ? "phone-input-error" : ""}`}>
@@ -376,7 +376,7 @@ export default function ProjectForm() {
 
         {/* Success Message - shown instead of form */}
         {submitStatus === "success" && (
-          <div className="p-8 bg-gradient-to-br from-[#7A7FEE]/10 to-[#9D7FEE]/10 border border-[#7A7FEE]/20 rounded-2xl">
+          <div className="p-8 bg-gradient-to-br from-[#7A7FEE]/10 to-[#9D7FEE]/10 dark:from-[#7A7FEE]/20 dark:to-[#9D7FEE]/20 border border-[#7A7FEE]/20 dark:border-[#7A7FEE]/30 rounded-2xl">
             {/* AI Loading Animation with Checkmark */}
             <div className="flex flex-col items-center justify-center mb-6">
               <div className="relative w-20 h-20 mb-4">
@@ -398,9 +398,9 @@ export default function ProjectForm() {
                 <div className="absolute top-1/2 right-0 w-1 h-1 bg-[#7A7FEE] rounded-full animate-ping" style={{ animationDelay: "1s" }}></div>
               </div>
               
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">Message Sent Successfully!</h3>
-              <p className="text-gray-700 text-center max-w-md mb-6">
-                Our experts will get back to you within <span className="font-semibold text-[#7A7FEE]">12-24 hours</span>.
+              <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Message Sent Successfully!</h3>
+              <p className="text-gray-700 dark:text-gray-300 text-center max-w-md mb-6">
+                Our experts will get back to you within <span className="font-semibold text-[#7A7FEE] dark:text-[#7A7FEE]">12-24 hours</span>.
               </p>
             </div>
             

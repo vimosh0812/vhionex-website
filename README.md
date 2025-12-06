@@ -1,6 +1,6 @@
-# vhionex - AI-First Development Agency Landing Page
+# vhionex (Pvt Ltd) - AI-First Development Agency Landing Page
 
-A modern, professional landing page for vhionex, an AI-first development agency built with Next.js 14, TypeScript, and Tailwind CSS.
+A modern, professional landing page for vhionex (Pvt Ltd), an AI-first development agency built with Next.js 14, TypeScript, and Tailwind CSS.
 
 ## Features
 

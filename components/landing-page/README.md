@@ -1,6 +1,6 @@
-# vhionex Landing Page Component
+# vhionex (Pvt Ltd) Landing Page Component
 
-This is a modular landing page component for the vhionex website. It's designed to be easily imported and used in any Next.js application.
+This is a modular landing page component for the vhionex (Pvt Ltd) website. It's designed to be easily imported and used in any Next.js application.
 
 ## Quick Integration
 
@@ -19,7 +19,7 @@ Make sure to include these assets in your public directory:
 
 - `/logo-light.png` - Light mode logo
 - `/logo-dark.png` - Dark mode logo
-- `/automatic-favicon-no-bg.png` - The vhionex favicon (or rename to `vhionex-favicon.png`)
+- `/automatic-favicon-no-bg.png` - The vhionex (Pvt Ltd) favicon (or rename to `vhionex-favicon.png`)
 - `/purple-circle-wave-static.png` - The purple wave graphic used in hero and CTA sections
 - `/noise-texture.png` - Texture for dark mode cards
 - Project images (or replace with your own)
