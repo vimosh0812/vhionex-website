@@ -30,10 +30,10 @@ export default function ProjectForm() {
   return (
     <div className="container mx-auto py-12 px-6 md:px-10">
       <div className="max-w-xl mx-auto w-full">
-        <div className="bg-[#3a3a3a] rounded-2xl p-6 md:p-8 shadow-lg">
+        <div className="bg-gray-50 rounded-2xl p-6 md:p-8 shadow-lg border border-gray-200">
           {/* Header */}
           <div className="mb-8">
-            <p className="text-white text-base md:text-lg leading-relaxed">
+            <p className="text-gray-700 text-base md:text-lg leading-relaxed">
               Answer some quick questions about your project and then schedule a call with your project manager.
             </p>
           </div>
@@ -42,8 +42,8 @@ export default function ProjectForm() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* First Name */}
             <div>
-              <label htmlFor="firstName" className="block text-white text-sm font-medium mb-3">
-                What is your first name? <span className="text-red-400">*</span>
+              <label htmlFor="firstName" className="block text-gray-900 text-sm font-medium mb-3">
+                What is your first name? <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <input
@@ -53,7 +53,7 @@ export default function ProjectForm() {
                   value={formData.firstName}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 bg-[#4a4a4a] border border-[#5a5a5a] rounded-lg text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all"
                   placeholder=""
                 />
                 {/* Small indicator icon */}
@@ -69,8 +69,8 @@ export default function ProjectForm() {
 
             {/* Last Name */}
             <div>
-              <label htmlFor="lastName" className="block text-white text-sm font-medium mb-3">
-                Last name? <span className="text-red-400">*</span>
+              <label htmlFor="lastName" className="block text-gray-900 text-sm font-medium mb-3">
+                Last name? <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -79,15 +79,15 @@ export default function ProjectForm() {
                 value={formData.lastName}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 bg-[#4a4a4a] border border-[#5a5a5a] rounded-lg text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all"
                 placeholder=""
               />
             </div>
 
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-white text-sm font-medium mb-3">
-                What is your email? <span className="text-red-400">*</span>
+              <label htmlFor="email" className="block text-gray-900 text-sm font-medium mb-3">
+                What is your email? <span className="text-red-500">*</span>
               </label>
               <input
                 type="email"
@@ -96,14 +96,14 @@ export default function ProjectForm() {
                 value={formData.email}
                 onChange={handleInputChange}
                 required
-                className="w-full px-4 py-3 bg-[#4a4a4a] border border-[#5a5a5a] rounded-lg text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all"
                 placeholder=""
               />
             </div>
 
             {/* Phone Number */}
             <div>
-              <label htmlFor="phone" className="block text-white text-sm font-medium mb-3">
+              <label htmlFor="phone" className="block text-gray-900 text-sm font-medium mb-3">
                 Your phone number
               </label>
               <input
@@ -112,7 +112,7 @@ export default function ProjectForm() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                className="w-full px-4 py-3 bg-[#4a4a4a] border border-[#5a5a5a] rounded-lg text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all"
+                className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg text-gray-900 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#7A7FEE] focus:border-transparent transition-all"
                 placeholder=""
               />
             </div>
