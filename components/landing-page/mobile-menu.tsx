@@ -133,16 +133,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </li>
           </ul>
         </nav>
-
-        <div className="p-4 mt-4 border-t border-gray-200 dark:border-gray-800">
-          <Link
-            href="/contact"
-            className="flex items-center justify-center w-full py-3 px-4 bg-[#7A7FEE] text-white rounded-lg text-base font-medium hover:bg-opacity-90 transition-colors"
-            onClick={onClose}
-          >
-            Contact Us
-          </Link>
-        </div>
       </div>
     </div>
   )

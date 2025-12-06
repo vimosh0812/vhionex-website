@@ -18,9 +18,15 @@ export const metadata: Metadata = {
   description:
     "vhionex (Pvt Ltd) builds high-quality, scalable platforms—client portals, marketplaces, AI automations, and SaaS—using the best tools for the job, no shortcuts.",
   icons: {
-    icon: [{ url: "/vhionex-new.png?v=2", type: "image/png" }],
-    apple: [{ url: "/vhionex-new.png?v=2" }],
-    shortcut: [{ url: "/vhionex-new.png?v=2", type: "image/png" }],
+    icon: [
+      { url: "/vhionex-new.png", type: "image/png", sizes: "any" },
+      { url: "/vhionex-new.png", type: "image/png", sizes: "32x32" },
+      { url: "/vhionex-new.png", type: "image/png", sizes: "16x16" },
+    ],
+    apple: [
+      { url: "/vhionex-new.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: [{ url: "/vhionex-new.png", type: "image/png" }],
   },
     generator: 'v0.app'
 }
